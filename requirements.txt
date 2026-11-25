@@ -1,0 +1,6 @@
+numpy
+scipy
+matplotlib
+trimesh
+manifold3d
+python-fcl
