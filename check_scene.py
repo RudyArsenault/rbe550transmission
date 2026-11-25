@@ -1,13 +1,7 @@
-"""
-Step 1 sanity check - run this before writing any planner code.
+#is the start/goal/intermediate from apart_transmission.scad pose collision-free? 
+# how far can the mainshaft lift before the rear stub hits the rear bore?
 
-  python check_scene.py
 
-* Is the start pose collision-free? The goal pose? The professor's
-  intermediate pose from apart_transmission.scad?
-* How far can the mainshaft lift before the rear stub hits the rear bore?
-* Saves scene_3d.png and scene_side.png (compare the side view with Figure 4).
-"""
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -24,7 +18,7 @@ def report(checker, name, q):
 
 
 def shifted(q, dx=0.0, dz=0.0):
-    """Copy of q moved by dx, dz (orientation unchanged)."""
+# copy of q moved by dx, dz (orientation unchanged)
     return q + np.r_[dx, 0.0, dz, 0.0, 0.0, 0.0, 0.0]
 
 
@@ -41,18 +35,18 @@ def main():
     report(checker, "apart_transmission.scad pose", q_apart)
     report(checker, "goal (on bench)", q_goal)
 
-    # Narrow-passage probe 1: pure vertical lift from the start pose.
+    #narrow-passage probe 1: pure vertical lift from the start pose
     print("\nStraight lift from start:")
     for dz in range(0, 31, 5):
         report(checker, f"  lift {dz:3d} mm", shifted(q_start, dz=dz))
 
-    # Probe 2: lift 15, then slide toward the front (-x). Does the rear stub
-    # clear the rear wall before the front of the gear stack hits the front wall?
+    # probe 2: lift 15, slide toward the front (-x)
+    #check the rear stub clears the rear wall before front of gear stack hits front wall
     print("\nLift 15 mm, then slide toward the front (-x):")
     for dx in range(0, 121, 15):
         report(checker, f"  lift 15, slide {dx:3d} mm", shifted(q_start, dx=-dx, dz=15))
 
-    # Figures
+    #saved figures
     fig, ax = viz.new_axes("Start (orange), apart pose (purple), goal (green)")
     viz.draw_scene(ax, checker, [q_start, q_apart, q_goal],
                    colors=["darkorange", "mediumpurple", "seagreen"])

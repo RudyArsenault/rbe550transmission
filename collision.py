@@ -1,5 +1,5 @@
 """
-Rigid-body collision checker for the mainshaft (Section 4.2).
+Rigid-body collision checker for the mainshaft 
 
 Uses python-fcl (Flexible Collision Library) with BVH triangle meshes:
   static  : case + bench + countershaft

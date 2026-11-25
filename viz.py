@@ -1,4 +1,4 @@
-"""Matplotlib helpers for drawing the scene (reused later for path/RRT figures)."""
+"""Matplotlib helpers for drawing the scene"""
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
